@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Button, Typography, Box, Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+      <Container maxWidth="sm">
+        <Box className="text-center" sx={{ p: 4, bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>
+          <Typography variant="h4" component="h1" gutterBottom fontWeight="bold">
+            University Finder
+          </Typography>
+          <Typography variant="h6" color="textSecondary" gutterBottom>
+            Find your perfect university with our AI-powered recommendation engine
+          </Typography>
+          <Box sx={{ mt: 4 }}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              size="large"
+              onClick={() => navigate('/universities')}
+              sx={{ px: 4, py: 1.5 }}
+            >
+              View Recommended Universities
+            </Button>
+          </Box>
+        </Box>
+      </Container>
     </div>
   );
 };
