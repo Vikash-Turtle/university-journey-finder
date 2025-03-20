@@ -8,16 +8,20 @@ import {
   Box, 
   useMediaQuery, 
   useTheme,
-  Badge,
   Paper,
-  Divider
+  AppBar,
+  Toolbar,
+  IconButton
 } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 import { sampleUniversities } from '../data/sampleUniversities';
 import UniversityCard from '../components/UniversityCard';
 
 const UniversityList = () => {
   const [selectedUniversities, setSelectedUniversities] = useState([]);
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   
@@ -32,81 +36,109 @@ const UniversityList = () => {
   };
   
   return (
-    <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
-      {/* Header Placeholder */}
-      <Box sx={{ height: '60px', backgroundColor: 'lightgrey', mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        Header Placeholder
-      </Box>
-      
-      {/* Title and Apply Button */}
-      <Box sx={{ 
-        display: 'flex', 
-        flexDirection: isMobile ? 'column' : 'row',
-        justifyContent: 'space-between', 
-        alignItems: isMobile ? 'flex-start' : 'center',
-        mb: 4,
-        gap: 2
+    <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
+      {/* Header */}
+      <AppBar position="static" sx={{ 
+        backgroundColor: 'white', 
+        color: 'text.primary',
+        boxShadow: '0px 2px 8px rgba(0,0,0,0.05)'
       }}>
-        <Typography variant="h4" component="h1" gutterBottom={isMobile}>
-          Recommended Universities
-        </Typography>
+        <Toolbar>
+          <IconButton 
+            edge="start" 
+            color="inherit" 
+            onClick={() => navigate('/')}
+            sx={{ mr: 2 }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>
+            University Finder
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      
+      <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
+        {/* Title and Apply Button */}
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'space-between', 
+          alignItems: isMobile ? 'flex-start' : 'center',
+          mb: 4,
+          gap: 2
+        }}>
+          <Typography 
+            variant="h4" 
+            component="h2" 
+            gutterBottom={isMobile}
+            sx={{ 
+              fontWeight: 700,
+              color: '#2c3e50'
+            }}
+          >
+            Recommended Universities
+          </Typography>
+          
+          <Button 
+            variant="contained" 
+            color="primary"
+            disabled={selectedUniversities.length === 0}
+            sx={{ 
+              px: 3, 
+              py: 1,
+              borderRadius: 2,
+              backgroundColor: selectedUniversities.length === 0 ? '#e0e0e0' : '#3498db',
+              '&:hover': {
+                backgroundColor: selectedUniversities.length === 0 ? '#e0e0e0' : '#2980b9',
+              },
+              transition: 'all 0.3s ease',
+              fontWeight: 'bold',
+              boxShadow: 3
+            }}
+          >
+            Apply Now ({selectedUniversities.length})
+          </Button>
+        </Box>
         
-        <Button 
-          variant="contained" 
-          color="primary"
-          disabled={selectedUniversities.length === 0}
+        {/* University Cards */}
+        <Grid container spacing={3}>
+          {sampleUniversities.map((university) => (
+            <Grid 
+              item 
+              xs={12} 
+              sm={6} 
+              md={4} 
+              key={university.id}
+              sx={{ display: 'flex' }}
+            >
+              <UniversityCard 
+                university={university}
+                onToggleSelection={handleToggleSelection}
+                isSelected={selectedUniversities.includes(university.id)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+        
+        {/* Disclaimer */}
+        <Paper 
+          elevation={0} 
           sx={{ 
-            px: 3, 
-            py: 1,
-            transition: 'all 0.3s ease',
-            '&:not(:disabled):hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: 4
-            }
+            mt: 6, 
+            p: 3, 
+            backgroundColor: 'rgba(236, 240, 241, 0.6)', 
+            borderRadius: 3,
+            border: '1px solid #e0e0e0'
           }}
         >
-          Apply Now ({selectedUniversities.length})
-        </Button>
-      </Box>
-      
-      {/* University Cards */}
-      <Grid container spacing={3}>
-        {sampleUniversities.map((university) => (
-          <Grid 
-            item 
-            xs={12} 
-            sm={isTablet ? 6 : 4} 
-            md={4} 
-            lg={3} 
-            key={university.id}
-            sx={{ display: 'flex' }}
-          >
-            <UniversityCard 
-              university={university}
-              onToggleSelection={handleToggleSelection}
-              isSelected={selectedUniversities.includes(university.id)}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      
-      {/* Disclaimer */}
-      <Paper 
-        elevation={0} 
-        sx={{ 
-          mt: 6, 
-          p: 3, 
-          backgroundColor: theme.palette.grey[50], 
-          borderRadius: 2,
-          border: `1px solid ${theme.palette.divider}`
-        }}
-      >
-        <Typography variant="body2" color="text.secondary" align="center">
-          The results have been generated using AI, which is highly accurate but may occasionally produce rare errors. 
-          Rest assured, our experts will thoroughly review and verify your admission eligibility once your application is submitted.
-        </Typography>
-      </Paper>
-    </Container>
+          <Typography variant="body2" color="text.secondary" align="center" sx={{ fontStyle: 'italic' }}>
+            The results have been generated using AI, which is highly accurate but may occasionally produce rare errors. 
+            Rest assured, our experts will thoroughly review and verify your admission eligibility once your application is submitted.
+          </Typography>
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 
