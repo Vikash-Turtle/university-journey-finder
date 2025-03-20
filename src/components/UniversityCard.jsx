@@ -10,7 +10,8 @@ import {
   Chip, 
   Avatar,
   useTheme,
-  Divider
+  Divider,
+  Tooltip
 } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -24,6 +25,9 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
   const handleToggleSelection = () => {
     onToggleSelection(university.id);
   };
+
+  // Check if university name is long
+  const isLongName = university.name.length > 30;
 
   return (
     <Card 
@@ -40,8 +44,8 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
           boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)'
         },
         border: '1px solid',
-        borderColor: isSelected ? '#3498db' : '#e0e0e0',
-        backgroundColor: isSelected ? 'rgba(52, 152, 219, 0.05)' : 'white'
+        borderColor: isSelected ? '#6E4D8B' : '#e0e0e0',
+        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white'
       }}
     >
       <Box sx={{ 
@@ -59,7 +63,7 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
           sx={{ 
             width: 56, 
             height: 56,
-            bgcolor: 'rgba(52, 152, 219, 0.1)',
+            bgcolor: 'rgba(110, 77, 139, 0.1)',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
           }}
         >
@@ -71,8 +75,10 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
           color={isSelected ? 'primary' : 'default'}
           sx={{ 
             transition: 'transform 0.2s',
+            color: isSelected ? '#6E4D8B' : 'rgba(0, 0, 0, 0.54)',
             '&:hover': {
-              transform: 'scale(1.1)'
+              transform: 'scale(1.1)',
+              color: isSelected ? '#5a3e73' : 'rgba(0, 0, 0, 0.54)'
             }
           }}
         >
@@ -81,33 +87,35 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
       </Box>
       
       <CardContent sx={{ flexGrow: 1, pt: 2 }}>
-        <Typography 
-          variant="h6" 
-          component="div" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 'bold',
-            height: '56px',
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            textOverflow: 'ellipsis',
-            mb: 1
-          }}
-        >
-          {university.name}
-        </Typography>
+        <Tooltip title={isLongName ? university.name : ""} placement="top">
+          <Typography 
+            variant="h6" 
+            component="div" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 'bold',
+              height: '56px',
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              textOverflow: 'ellipsis',
+              mb: 1
+            }}
+          >
+            {university.name}
+          </Typography>
+        </Tooltip>
         
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <LocationOnIcon sx={{ color: 'text.secondary', fontSize: 18, mr: 0.5 }} />
+          <LocationOnIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5, opacity: 0.8 }} />
           <Typography variant="body2" color="text.secondary">
             {university.location}
           </Typography>
         </Box>
         
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-          <MenuBookIcon sx={{ color: 'text.secondary', fontSize: 18, mr: 0.5 }} />
+          <MenuBookIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5, opacity: 0.8 }} />
           <Typography variant="body2">
             {university.coursesOffered} Courses Offered
           </Typography>
@@ -117,23 +125,25 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
           <Chip 
-            label={`QS: ${university.qsRanking}`} 
+            label={`QS World Ranking: ${university.qsRanking}`} 
             size="small" 
             variant="outlined"
             sx={{ 
               borderRadius: '4px', 
-              backgroundColor: 'rgba(52, 152, 219, 0.08)',
-              borderColor: 'rgba(52, 152, 219, 0.3)',
+              backgroundColor: 'rgba(110, 77, 139, 0.08)',
+              borderColor: 'rgba(110, 77, 139, 0.3)',
+              color: 'rgba(0, 0, 0, 0.7)'
             }}
           />
           <Chip 
-            label={`THE: ${university.theRanking}`} 
+            label={`THE Global Ranking: ${university.theRanking}`} 
             size="small" 
             variant="outlined"
             sx={{ 
               borderRadius: '4px', 
-              backgroundColor: 'rgba(46, 204, 113, 0.08)',
-              borderColor: 'rgba(46, 204, 113, 0.3)',
+              backgroundColor: 'rgba(110, 77, 139, 0.08)',
+              borderColor: 'rgba(110, 77, 139, 0.3)',
+              color: 'rgba(0, 0, 0, 0.7)'
             }}
           />
           <Chip 
@@ -142,8 +152,9 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             variant="outlined"
             sx={{ 
               borderRadius: '4px', 
-              backgroundColor: 'rgba(155, 89, 182, 0.08)',
-              borderColor: 'rgba(155, 89, 182, 0.3)',
+              backgroundColor: 'rgba(110, 77, 139, 0.08)',
+              borderColor: 'rgba(110, 77, 139, 0.3)',
+              color: 'rgba(0, 0, 0, 0.7)'
             }}
           />
         </Box>
@@ -158,11 +169,11 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             borderRadius: '8px',
             textTransform: 'none',
             fontWeight: 600,
-            borderColor: '#3498db',
-            color: '#3498db',
+            borderColor: '#6E4D8B',
+            color: '#6E4D8B',
             '&:hover': {
-              borderColor: '#2980b9',
-              backgroundColor: 'rgba(52, 152, 219, 0.05)',
+              borderColor: '#5a3e73',
+              backgroundColor: 'rgba(110, 77, 139, 0.05)',
             },
           }}
         >

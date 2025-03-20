@@ -36,7 +36,7 @@ const UniversityList = () => {
   };
   
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f7fa' }}>
+    <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f7fa', position: 'relative', pb: isMobile && selectedUniversities.length > 0 ? 8 : 0 }}>
       {/* Header */}
       <AppBar position="static" sx={{ 
         backgroundColor: 'white', 
@@ -59,7 +59,7 @@ const UniversityList = () => {
       </AppBar>
       
       <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
-        {/* Title and Apply Button */}
+        {/* Title and Apply Button (non-mobile) */}
         <Box sx={{ 
           display: 'flex', 
           flexDirection: isMobile ? 'column' : 'row',
@@ -69,7 +69,7 @@ const UniversityList = () => {
           gap: 2
         }}>
           <Typography 
-            variant="h4" 
+            variant="h5" 
             component="h2" 
             gutterBottom={isMobile}
             sx={{ 
@@ -80,25 +80,25 @@ const UniversityList = () => {
             Recommended Universities
           </Typography>
           
-          <Button 
-            variant="contained" 
-            color="primary"
-            disabled={selectedUniversities.length === 0}
-            sx={{ 
-              px: 3, 
-              py: 1,
-              borderRadius: 2,
-              backgroundColor: selectedUniversities.length === 0 ? '#e0e0e0' : '#3498db',
-              '&:hover': {
-                backgroundColor: selectedUniversities.length === 0 ? '#e0e0e0' : '#2980b9',
-              },
-              transition: 'all 0.3s ease',
-              fontWeight: 'bold',
-              boxShadow: 3
-            }}
-          >
-            Apply Now ({selectedUniversities.length})
-          </Button>
+          {!isMobile && selectedUniversities.length > 0 && (
+            <Button 
+              variant="contained" 
+              sx={{ 
+                px: 3, 
+                py: 1,
+                borderRadius: 2,
+                backgroundColor: '#6E4D8B',
+                '&:hover': {
+                  backgroundColor: '#5a3e73',
+                },
+                transition: 'all 0.3s ease',
+                fontWeight: 'bold',
+                boxShadow: 3
+              }}
+            >
+              Apply Now ({selectedUniversities.length})
+            </Button>
+          )}
         </Box>
         
         {/* University Cards */}
@@ -127,9 +127,9 @@ const UniversityList = () => {
           sx={{ 
             mt: 6, 
             p: 3, 
-            backgroundColor: 'rgba(236, 240, 241, 0.6)', 
+            backgroundColor: 'rgba(110, 77, 139, 0.05)', 
             borderRadius: 3,
-            border: '1px solid #e0e0e0'
+            border: '1px solid rgba(110, 77, 139, 0.2)'
           }}
         >
           <Typography variant="body2" color="text.secondary" align="center" sx={{ fontStyle: 'italic' }}>
@@ -138,6 +138,42 @@ const UniversityList = () => {
           </Typography>
         </Paper>
       </Container>
+
+      {/* Sticky Apply Button for Mobile */}
+      {isMobile && selectedUniversities.length > 0 && (
+        <Box 
+          sx={{ 
+            position: 'fixed', 
+            bottom: 0, 
+            left: 0, 
+            right: 0, 
+            p: 2, 
+            backgroundColor: 'white', 
+            boxShadow: '0px -2px 10px rgba(0,0,0,0.1)',
+            zIndex: 10,
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <Button 
+            variant="contained" 
+            fullWidth
+            sx={{ 
+              py: 1.5,
+              borderRadius: 2,
+              backgroundColor: '#6E4D8B',
+              '&:hover': {
+                backgroundColor: '#5a3e73',
+              },
+              fontWeight: 'bold',
+              boxShadow: 3,
+              maxWidth: '500px'
+            }}
+          >
+            Apply Now ({selectedUniversities.length})
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
