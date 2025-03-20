@@ -23,7 +23,6 @@ const UniversityList = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   
   const handleToggleSelection = (universityId) => {
     setSelectedUniversities(prev => {
@@ -36,7 +35,12 @@ const UniversityList = () => {
   };
   
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f7fa', position: 'relative', pb: isMobile && selectedUniversities.length > 0 ? 8 : 0 }}>
+    <Box sx={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#F5F5F5', 
+      position: 'relative', 
+      pb: isMobile && selectedUniversities.length > 0 ? 8 : 0 
+    }}>
       {/* Header */}
       <AppBar position="static" sx={{ 
         backgroundColor: 'white', 
@@ -69,7 +73,7 @@ const UniversityList = () => {
           gap: 2
         }}>
           <Typography 
-            variant="h5" 
+            variant="h6" 
             component="h2" 
             gutterBottom={isMobile}
             sx={{ 
@@ -127,7 +131,7 @@ const UniversityList = () => {
           sx={{ 
             mt: 6, 
             p: 3, 
-            backgroundColor: 'rgba(110, 77, 139, 0.05)', 
+            backgroundColor: 'rgba(110, 77, 139, 0.08)', 
             borderRadius: 3,
             border: '1px solid rgba(110, 77, 139, 0.2)'
           }}

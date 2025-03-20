@@ -45,7 +45,7 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         },
         border: '1px solid',
         borderColor: isSelected ? '#6E4D8B' : '#e0e0e0',
-        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white'
+        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.12)' : 'white'
       }}
     >
       <Box sx={{ 
@@ -54,7 +54,8 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         justifyContent: 'space-between', 
         alignItems: 'center',
         borderBottom: '1px solid',
-        borderColor: 'rgba(0, 0, 0, 0.08)'
+        borderColor: isSelected ? 'rgba(110, 77, 139, 0.3)' : 'rgba(0, 0, 0, 0.08)',
+        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white'
       }}>
         <Avatar 
           src={university.logoUrl}
@@ -78,7 +79,7 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             color: isSelected ? '#6E4D8B' : 'rgba(0, 0, 0, 0.54)',
             '&:hover': {
               transform: 'scale(1.1)',
-              color: isSelected ? '#5a3e73' : 'rgba(0, 0, 0, 0.54)'
+              color: isSelected ? '#5a3e73' : '#6E4D8B'
             }
           }}
         >
@@ -86,21 +87,23 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         </IconButton>
       </Box>
       
-      <CardContent sx={{ flexGrow: 1, pt: 2 }}>
-        <Tooltip title={isLongName ? university.name : ""} placement="top">
+      <CardContent sx={{ flexGrow: 1, pt: 2, backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white' }}>
+        <Tooltip title={university.name} placement="top">
           <Typography 
             variant="h6" 
             component="div" 
             gutterBottom 
             sx={{ 
               fontWeight: 'bold',
-              height: '56px',
+              minHeight: '60px',
               overflow: 'hidden',
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
               textOverflow: 'ellipsis',
-              mb: 1
+              mb: 1,
+              lineHeight: 1.3,
+              color: isSelected ? '#502e71' : '#2c3e50'
             }}
           >
             {university.name}
@@ -109,19 +112,19 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
           <LocationOnIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5, opacity: 0.8 }} />
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color={isSelected ? 'text.primary' : 'text.secondary'}>
             {university.location}
           </Typography>
         </Box>
         
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <MenuBookIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5, opacity: 0.8 }} />
-          <Typography variant="body2">
+          <Typography variant="body2" color={isSelected ? 'text.primary' : 'text.secondary'}>
             {university.coursesOffered} Courses Offered
           </Typography>
         </Box>
         
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ mb: 2, borderColor: isSelected ? 'rgba(110, 77, 139, 0.3)' : 'rgba(0, 0, 0, 0.08)' }} />
         
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
           <Chip 
@@ -129,10 +132,11 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             size="small" 
             variant="outlined"
             sx={{ 
-              borderRadius: '4px', 
-              backgroundColor: 'rgba(110, 77, 139, 0.08)',
-              borderColor: 'rgba(110, 77, 139, 0.3)',
-              color: 'rgba(0, 0, 0, 0.7)'
+              borderRadius: '6px', 
+              backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.15)' : 'rgba(110, 77, 139, 0.08)',
+              borderColor: isSelected ? 'rgba(110, 77, 139, 0.5)' : 'rgba(110, 77, 139, 0.3)',
+              color: isSelected ? '#502e71' : 'rgba(0, 0, 0, 0.7)',
+              fontWeight: 500
             }}
           />
           <Chip 
@@ -140,10 +144,11 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             size="small" 
             variant="outlined"
             sx={{ 
-              borderRadius: '4px', 
-              backgroundColor: 'rgba(110, 77, 139, 0.08)',
-              borderColor: 'rgba(110, 77, 139, 0.3)',
-              color: 'rgba(0, 0, 0, 0.7)'
+              borderRadius: '6px', 
+              backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.15)' : 'rgba(110, 77, 139, 0.08)',
+              borderColor: isSelected ? 'rgba(110, 77, 139, 0.5)' : 'rgba(110, 77, 139, 0.3)',
+              color: isSelected ? '#502e71' : 'rgba(0, 0, 0, 0.7)',
+              fontWeight: 500
             }}
           />
           <Chip 
@@ -151,30 +156,40 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             size="small" 
             variant="outlined"
             sx={{ 
-              borderRadius: '4px', 
-              backgroundColor: 'rgba(110, 77, 139, 0.08)',
-              borderColor: 'rgba(110, 77, 139, 0.3)',
-              color: 'rgba(0, 0, 0, 0.7)'
+              borderRadius: '6px', 
+              backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.15)' : 'rgba(110, 77, 139, 0.08)',
+              borderColor: isSelected ? 'rgba(110, 77, 139, 0.5)' : 'rgba(110, 77, 139, 0.3)',
+              color: isSelected ? '#502e71' : 'rgba(0, 0, 0, 0.7)',
+              fontWeight: 500
             }}
           />
         </Box>
       </CardContent>
       
-      <Box sx={{ p: 2, pt: 0 }}>
+      <Box sx={{ 
+        p: 2, 
+        pt: 0, 
+        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white',
+        borderTop: '1px solid',
+        borderColor: isSelected ? 'rgba(110, 77, 139, 0.1)' : 'transparent'
+      }}>
         <Button 
           size="medium" 
-          variant="outlined" 
+          variant={isSelected ? "contained" : "outlined"}
           fullWidth
           sx={{ 
             borderRadius: '8px',
             textTransform: 'none',
             fontWeight: 600,
             borderColor: '#6E4D8B',
-            color: '#6E4D8B',
+            color: isSelected ? 'white' : '#6E4D8B',
+            backgroundColor: isSelected ? '#6E4D8B' : 'transparent',
             '&:hover': {
               borderColor: '#5a3e73',
-              backgroundColor: 'rgba(110, 77, 139, 0.05)',
+              backgroundColor: isSelected ? '#5a3e73' : 'rgba(110, 77, 139, 0.05)',
             },
+            boxShadow: isSelected ? 2 : 0,
+            transition: 'all 0.3s ease'
           }}
         >
           View Courses
