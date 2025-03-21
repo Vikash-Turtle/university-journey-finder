@@ -23,6 +23,10 @@ const UniversityList = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isLaptop = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+  const isDesktop = useMediaQuery(theme.breakpoints.between('lg', 'xl'));
+  const isLargeDesktop = useMediaQuery(theme.breakpoints.up('xl'));
   
   const handleToggleSelection = (universityId) => {
     setSelectedUniversities(prev => {
@@ -32,6 +36,16 @@ const UniversityList = () => {
         return [...prev, universityId];
       }
     });
+  };
+  
+  // Determine grid size based on screen size
+  const getGridSize = () => {
+    if (isMobile) return 12; // 1 card per row
+    if (isTablet) return 6;  // 2 cards per row
+    if (isLaptop) return 4;  // 3 cards per row
+    if (isDesktop) return 3; // 4 cards per row
+    if (isLargeDesktop) return 3; // 4 cards per row
+    return 3; // Default to 4 cards per row
   };
   
   return (
@@ -62,7 +76,7 @@ const UniversityList = () => {
         </Toolbar>
       </AppBar>
       
-      <Container maxWidth="lg" sx={{ pt: 4, pb: 8 }}>
+      <Container maxWidth="xl" sx={{ pt: 4, pb: 8 }}>
         {/* Title and Apply Button (non-mobile) */}
         <Box sx={{ 
           display: 'flex', 
@@ -73,7 +87,7 @@ const UniversityList = () => {
           gap: 2
         }}>
           <Typography 
-            variant="h6" 
+            variant="subtitle1" 
             component="h2" 
             gutterBottom={isMobile}
             sx={{ 
@@ -111,8 +125,10 @@ const UniversityList = () => {
             <Grid 
               item 
               xs={12} 
-              sm={6} 
-              md={4} 
+              sm={getGridSize()} 
+              md={getGridSize()} 
+              lg={getGridSize()}
+              xl={getGridSize()}
               key={university.id}
               sx={{ display: 'flex' }}
             >

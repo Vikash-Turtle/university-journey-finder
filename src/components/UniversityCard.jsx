@@ -87,7 +87,13 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         </IconButton>
       </Box>
       
-      <CardContent sx={{ flexGrow: 1, pt: 2, backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white' }}>
+      <CardContent sx={{ 
+        flexGrow: 1, 
+        pt: 2, 
+        backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         <Tooltip title={university.name} placement="top">
           <Typography 
             variant="h6" 
@@ -95,7 +101,7 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
             gutterBottom 
             sx={{ 
               fontWeight: 'bold',
-              minHeight: '60px',
+              height: '60px',
               overflow: 'hidden',
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -126,7 +132,13 @@ const UniversityCard = ({ university, onToggleSelection, isSelected }) => {
         
         <Divider sx={{ mb: 2, borderColor: isSelected ? 'rgba(110, 77, 139, 0.3)' : 'rgba(0, 0, 0, 0.08)' }} />
         
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: 1, 
+          mb: 2,
+          mt: 'auto' // Push chips to the bottom of the card
+        }}>
           <Chip 
             label={`QS World Ranking: ${university.qsRanking}`} 
             size="small" 
