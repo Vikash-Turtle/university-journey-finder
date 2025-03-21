@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, Typography, Button, IconButton, Box, Chip, Avatar, useTheme, Divider, Tooltip } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -5,6 +6,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SchoolIcon from '@mui/icons-material/School';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+
 const UniversityCard = ({
   university,
   onToggleSelection,
@@ -15,8 +17,6 @@ const UniversityCard = ({
     onToggleSelection(university.id);
   };
 
-  // Check if university name is long
-  const isLongName = university.name.length > 30;
   return <Card sx={{
     width: '100%',
     height: '100%',
@@ -42,22 +42,42 @@ const UniversityCard = ({
       borderColor: isSelected ? 'rgba(110, 77, 139, 0.3)' : 'rgba(0, 0, 0, 0.08)',
       backgroundColor: isSelected ? 'rgba(110, 77, 139, 0.05)' : 'white'
     }}>
-        <Avatar src={university.logoUrl} alt={university.name} variant="rounded" sx={{
-        width: 56,
-        height: 56,
-        bgcolor: 'rgba(110, 77, 139, 0.1)',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
-      }} className="bg-slate-300">
-          {!university.logoUrl && <SchoolIcon />}
-        </Avatar>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, overflow: 'hidden' }}>
+          <Avatar src={university.logoUrl} alt={university.name} variant="rounded" sx={{
+            width: 56,
+            height: 56,
+            flexShrink: 0,
+            bgcolor: 'rgba(110, 77, 139, 0.1)',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
+          }} className="bg-slate-300">
+            {!university.logoUrl && <SchoolIcon />}
+          </Avatar>
+          
+          <Tooltip title={university.name} placement="top">
+            <Typography variant="h6" component="div" sx={{
+              fontWeight: 'bold',
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              textOverflow: 'ellipsis',
+              lineHeight: 1.3,
+              color: isSelected ? '#502e71' : '#2c3e50'
+            }}>
+              {university.name}
+            </Typography>
+          </Tooltip>
+        </Box>
+        
         <IconButton aria-label="add to watchlist" onClick={handleToggleSelection} color={isSelected ? 'primary' : 'default'} sx={{
-        transition: 'transform 0.2s',
-        color: isSelected ? '#6E4D8B' : 'rgba(0, 0, 0, 0.54)',
-        '&:hover': {
-          transform: 'scale(1.1)',
-          color: isSelected ? '#5a3e73' : '#6E4D8B'
-        }
-      }}>
+          flexShrink: 0,
+          transition: 'transform 0.2s',
+          color: isSelected ? '#6E4D8B' : 'rgba(0, 0, 0, 0.54)',
+          '&:hover': {
+            transform: 'scale(1.1)',
+            color: isSelected ? '#5a3e73' : '#6E4D8B'
+          }
+        }}>
           {isSelected ? <BookmarkIcon /> : <BookmarkBorderIcon />}
         </IconButton>
       </Box>
@@ -69,23 +89,6 @@ const UniversityCard = ({
       display: 'flex',
       flexDirection: 'column'
     }}>
-        <Tooltip title={university.name} placement="top">
-          <Typography variant="h6" component="div" gutterBottom sx={{
-          fontWeight: 'bold',
-          height: '60px',
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          textOverflow: 'ellipsis',
-          mb: 1,
-          lineHeight: 1.3,
-          color: isSelected ? '#502e71' : '#2c3e50'
-        }}>
-            {university.name}
-          </Typography>
-        </Tooltip>
-        
         <Box sx={{
         display: 'flex',
         alignItems: 'center',
