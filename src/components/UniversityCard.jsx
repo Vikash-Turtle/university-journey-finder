@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, Typography, Button, IconButton, Box, Chip, Avatar, useTheme, Divider, Tooltip } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -6,6 +5,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SchoolIcon from '@mui/icons-material/School';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Link } from 'react-router-dom';
 
 const UniversityCard = ({
   university,
@@ -131,7 +131,7 @@ const UniversityCard = ({
         flexWrap: 'wrap',
         gap: 1,
         mb: 2,
-        mt: 'auto' // Push chips to the bottom of the card
+        mt: 'auto'
       }}>
           <Chip label={`QS World Ranking: ${university.qsRanking}`} size="small" variant="outlined" sx={{
           borderRadius: '6px',
@@ -164,20 +164,27 @@ const UniversityCard = ({
       borderTop: '1px solid',
       borderColor: isSelected ? 'rgba(110, 77, 139, 0.1)' : 'transparent'
     }}>
-        <Button size="medium" variant={isSelected ? "contained" : "outlined"} fullWidth sx={{
-        borderRadius: '8px',
-        textTransform: 'none',
-        fontWeight: 600,
-        borderColor: '#6E4D8B',
-        color: isSelected ? 'white' : '#6E4D8B',
-        backgroundColor: isSelected ? '#6E4D8B' : 'transparent',
-        '&:hover': {
-          borderColor: '#5a3e73',
-          backgroundColor: isSelected ? '#5a3e73' : 'rgba(110, 77, 139, 0.05)'
-        },
-        boxShadow: isSelected ? 2 : 0,
-        transition: 'all 0.3s ease'
-      }}>
+        <Button 
+          component={Link} 
+          to={`/courses/${university.id}`}
+          size="medium" 
+          variant={isSelected ? "contained" : "outlined"} 
+          fullWidth 
+          sx={{
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: 600,
+            borderColor: '#6E4D8B',
+            color: isSelected ? 'white' : '#6E4D8B',
+            backgroundColor: isSelected ? '#6E4D8B' : 'transparent',
+            '&:hover': {
+              borderColor: '#5a3e73',
+              backgroundColor: isSelected ? '#5a3e73' : 'rgba(110, 77, 139, 0.05)'
+            },
+            boxShadow: isSelected ? 2 : 0,
+            transition: 'all 0.3s ease'
+          }}
+        >
           View Courses
         </Button>
       </Box>
