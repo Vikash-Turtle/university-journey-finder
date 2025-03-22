@@ -6,7 +6,9 @@ import {
   TextField, 
   InputAdornment, 
   Grid, 
-  Paper 
+  Paper, 
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CourseCard from './CourseCard';
@@ -14,6 +16,8 @@ import CourseCard from './CourseCard';
 const CoursesTab = ({ universityId, courses = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   useEffect(() => {
     const universitySpecificCourses = courses.filter(course => 
@@ -34,8 +38,19 @@ const CoursesTab = ({ universityId, courses = [] }) => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h5" component="h2" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: { xs: 'flex-start', md: 'center' },
+        flexDirection: { xs: 'column', md: 'row' },
+        mb: 3,
+        gap: 2
+      }}>
+        <Typography variant="h5" component="h2" sx={{ 
+          fontWeight: 'bold', 
+          color: '#2c3e50',
+          fontSize: { xs: '1.2rem', md: '1.5rem' }
+        }}>
           Available Courses
         </Typography>
         
@@ -53,7 +68,9 @@ const CoursesTab = ({ universityId, courses = [] }) => {
             ),
             sx: { borderRadius: 2 }
           }}
-          sx={{ width: { xs: '100%', sm: '300px' } }}
+          sx={{ 
+            width: { xs: '100%', sm: '300px' },
+          }}
         />
       </Box>
       
@@ -69,7 +86,7 @@ const CoursesTab = ({ universityId, courses = [] }) => {
         <Paper 
           elevation={0} 
           sx={{ 
-            p: 6, 
+            p: { xs: 3, md: 6 }, 
             textAlign: 'center',
             borderRadius: 3,
             backgroundColor: 'rgba(0,0,0,0.02)',

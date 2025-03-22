@@ -7,10 +7,17 @@ import {
   Button, 
   Box, 
   Divider,
-  Grid
+  Grid,
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const CourseCard = ({ course }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  
   return (
     <Card sx={{
       width: '100%',
@@ -27,95 +34,103 @@ const CourseCard = ({ course }) => {
       }
     }}>
       <CardContent sx={{
-        p: 3,
-        '&:last-child': { pb: 3 }
+        p: { xs: 2, md: 3 },
+        '&:last-child': { pb: { xs: 2, md: 3 } }
       }}>
-        <Typography variant="h5" component="div" gutterBottom sx={{
-          fontWeight: 'bold',
-          color: '#2c3e50',
-          mb: 1
+        {/* Header with course name and details button */}
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: { xs: 'flex-start', md: 'center' },
+          flexDirection: { xs: 'column', md: 'row' },
+          mb: 2,
+          gap: { xs: 2, md: 0 }
         }}>
-          {course.name}
-        </Typography>
+          <Box>
+            <Typography variant="h5" component="div" sx={{
+              fontWeight: 'bold',
+              color: '#2c3e50',
+              mb: 1,
+              fontSize: { xs: '1.1rem', md: '1.3rem' }
+            }}>
+              {course.name}
+            </Typography>
+            
+            <Typography variant="body2" color="text.secondary">
+              {course.code} • {course.department}
+            </Typography>
+          </Box>
+          
+          <Button 
+            variant="contained"
+            sx={{
+              borderRadius: '8px',
+              textTransform: 'none',
+              fontWeight: 600,
+              backgroundColor: '#6E4D8B',
+              px: 3,
+              py: 1,
+              alignSelf: { xs: 'flex-start', md: 'center' },
+              '&:hover': {
+                backgroundColor: '#5a3e73',
+              },
+              width: { xs: 'auto', md: 'auto' }
+            }}
+          >
+            Program Details
+          </Button>
+        </Box>
         
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          {course.code} • {course.department}
-        </Typography>
+        <Divider sx={{ mb: 3 }} />
         
-        <Divider sx={{ mb: 2 }} />
-        
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {/* Field of Study (Department) */}
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body2" color="text.secondary">
-                  Field of Study
-                </Typography>
-                <Typography variant="body2" fontWeight="medium">
-                  {course.department}
-                </Typography>
-              </Box>
-              
-              {/* Learning Type */}
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body2" color="text.secondary">
-                  Learning Type
-                </Typography>
-                <Typography variant="body2" fontWeight="medium">
-                  {course.learningType || "Full-time"}
-                </Typography>
-              </Box>
-              
-              {/* Duration */}
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body2" color="text.secondary">
-                  Duration
-                </Typography>
-                <Typography variant="body2" fontWeight="medium">
-                  {course.duration}
-                </Typography>
-              </Box>
-              
-              {/* Tuition Fees */}
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body2" color="text.secondary">
-                  Tuition Fees
-                </Typography>
-                <Typography variant="body2" fontWeight="bold" color="#2c3e50">
-                  {course.tuitionFee}
-                </Typography>
-              </Box>
+        {/* Course details in horizontal layout */}
+        <Grid container spacing={2}>
+          {/* Field of Study */}
+          <Grid item xs={6} sm={3}>
+            <Box>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Field of Study
+              </Typography>
+              <Typography variant="body2" fontWeight="medium">
+                {course.department}
+              </Typography>
             </Box>
           </Grid>
           
-          <Grid item xs={12} md={4} sx={{ 
-            display: 'flex', 
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderLeft: { md: '1px solid #e0e0e0' },
-            pt: { xs: 2, md: '16px !important' },
-            mt: { xs: 2, md: 0 },
-            borderTop: { xs: '1px solid #e0e0e0', md: 'none' }
-          }}>
-            <Button 
-              variant="contained"
-              sx={{
-                borderRadius: '8px',
-                textTransform: 'none',
-                fontWeight: 600,
-                backgroundColor: '#6E4D8B',
-                px: 3,
-                py: 1,
-                '&:hover': {
-                  backgroundColor: '#5a3e73',
-                },
-                width: { xs: '100%', md: 'auto' }
-              }}
-            >
-              Program Details
-            </Button>
+          {/* Learning Type */}
+          <Grid item xs={6} sm={3}>
+            <Box>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Learning Type
+              </Typography>
+              <Typography variant="body2" fontWeight="medium">
+                {course.learningType || "Full-time"}
+              </Typography>
+            </Box>
+          </Grid>
+          
+          {/* Duration */}
+          <Grid item xs={6} sm={3}>
+            <Box>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Duration
+              </Typography>
+              <Typography variant="body2" fontWeight="medium">
+                {course.duration}
+              </Typography>
+            </Box>
+          </Grid>
+          
+          {/* Tuition Fees */}
+          <Grid item xs={6} sm={3}>
+            <Box>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Tuition Fees
+              </Typography>
+              <Typography variant="body2" fontWeight="bold" color="#2c3e50">
+                {course.tuitionFee}
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
       </CardContent>

@@ -5,15 +5,23 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import OverviewTab from './OverviewTab';
 import CoursesTab from './CoursesTab';
 import ServicesTab from './ServicesTab';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const TabsSection = ({ university, activeTab, setActiveTab, universityId, courses }) => {
+  const isMobile = useIsMobile();
+  
   return (
     <Box sx={{ 
-      maxWidth: 'calc(100% - 200px)', // Match the width of hero section
-      margin: '0 auto'
+      maxWidth: {
+        xs: 'calc(100% - 32px)',
+        sm: 'calc(100% - 80px)',
+        md: 'calc(100% - 200px)',
+      },
+      margin: '0 auto',
+      mt: 4,
     }}>
       <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-white border shadow-sm mb-4">
+        <TabsList className="bg-white border shadow-sm mb-4 w-full overflow-x-auto">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="courses">Courses</TabsTrigger>
           <TabsTrigger value="services">Our Services</TabsTrigger>
