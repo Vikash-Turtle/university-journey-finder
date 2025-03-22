@@ -47,10 +47,8 @@ const CourseList = () => {
       {/* Header with back button */}
       <CourseListHeader />
       
-      {/* Hero Section */}
-      <Container maxWidth="xl">
-        <HeroSection university={university} />
-      </Container>
+      {/* Hero Section - full width */}
+      <HeroSection university={university} />
       
       {/* Content Section with Tabs */}
       <Container maxWidth="xl" sx={{ py: 4 }}>

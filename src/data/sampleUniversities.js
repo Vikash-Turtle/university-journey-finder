@@ -6,9 +6,10 @@ export const sampleUniversities = [
     name: "Harvard University",
     location: "Cambridge, USA",
     coursesOffered: 150,
-    qsRanking: 5,
-    theRanking: 2,
+    qsRanking: "5",
+    theRanking: "2",
     estd: 1636,
+    website: "harvard.edu"
   },
   {
     id: 2,
@@ -16,9 +17,10 @@ export const sampleUniversities = [
     name: "University of Oxford",
     location: "Oxford, UK",
     coursesOffered: 200,
-    qsRanking: 2,
-    theRanking: 1,
+    qsRanking: "2",
+    theRanking: "1",
     estd: 1096,
+    website: "ox.ac.uk"
   },
   {
     id: 3,
@@ -26,9 +28,10 @@ export const sampleUniversities = [
     name: "Massachusetts Institute of Technology",
     location: "Cambridge, USA",
     coursesOffered: 120,
-    qsRanking: 1,
-    theRanking: 5,
+    qsRanking: "1",
+    theRanking: "5",
     estd: 1861,
+    website: "mit.edu"
   },
   {
     id: 4,
@@ -36,9 +39,10 @@ export const sampleUniversities = [
     name: "Stanford University",
     location: "Stanford, USA",
     coursesOffered: 180,
-    qsRanking: 3,
-    theRanking: "N/A",
+    qsRanking: "3",
+    theRanking: "4",
     estd: 1885,
+    website: "stanford.edu"
   },
   {
     id: 5,
@@ -46,9 +50,10 @@ export const sampleUniversities = [
     name: "University of Cambridge",
     location: "Cambridge, UK",
     coursesOffered: 160,
-    qsRanking: 4,
-    theRanking: 3,
+    qsRanking: "4",
+    theRanking: "3",
     estd: 1209,
+    website: "cam.ac.uk"
   },
   {
     id: 6,
@@ -56,9 +61,10 @@ export const sampleUniversities = [
     name: "California Institute of Technology",
     location: "Pasadena, USA",
     coursesOffered: 90,
-    qsRanking: 6,
-    theRanking: 4,
+    qsRanking: "6",
+    theRanking: "4",
     estd: 1891,
+    website: "caltech.edu"
   },
   {
     id: 7,
@@ -66,8 +72,9 @@ export const sampleUniversities = [
     name: "University of Tokyo",
     location: "Tokyo, Japan",
     coursesOffered: 110,
-    qsRanking: 24,
-    theRanking: 36,
+    qsRanking: "24",
+    theRanking: "36",
     estd: 1877,
+    website: "u-tokyo.ac.jp"
   }
 ];

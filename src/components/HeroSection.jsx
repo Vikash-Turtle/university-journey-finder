@@ -1,100 +1,139 @@
 
 import React from 'react';
-import { 
-  Box, 
-  Typography, 
-  Paper, 
-  Avatar,
-  Button 
-} from '@mui/material';
-import SchoolIcon from '@mui/icons-material/School';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Box, Typography, Link, Button } from '@mui/material';
+import { Avatar } from '@/components/ui/avatar';
+import { Button as ShadcnButton } from '@/components/ui/button';
 
 const HeroSection = ({ university }) => {
   if (!university) return null;
 
   return (
-    <Box sx={{
-      position: 'relative',
-      backgroundColor: '#fff',
-      pt: 3,
-      pb: 4,
-      borderBottom: '1px solid #eaeaea'
-    }}>
-      <Paper elevation={0} sx={{
-        display: 'flex',
-        width: '100%',
-        p: { xs: 2, md: 3 },
-        borderRadius: 2,
-        flexDirection: { xs: 'column', md: 'row' },
-        alignItems: { xs: 'flex-start', md: 'center' },
-        gap: 3,
-        border: '1px solid #e0e0e0',
-        backgroundColor: '#fff'
-      }}>
-        {/* University Logo */}
-        <Avatar 
-          src={university.logoUrl} 
-          alt={university.name}
-          variant="rounded"
+    <Box sx={{ width: '100%' }}>
+      {/* Hero Image with Overlay */}
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: { xs: '200px', sm: '300px', md: '400px' },
+          backgroundImage: 'url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2071&auto=format&fit=crop")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Overlay at the bottom with university info */}
+        <Box
           sx={{
-            width: { xs: 60, md: 80 },
-            height: { xs: 60, md: 80 },
-            bgcolor: 'rgba(110, 77, 139, 0.1)',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)'
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            padding: { xs: 2, sm: 3 },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
-          {!university.logoUrl && <SchoolIcon sx={{ fontSize: 40 }} />}
-        </Avatar>
-        
-        {/* University Info */}
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="h5" component="h1" sx={{ 
-            fontWeight: 'bold', 
-            color: '#2c3e50',
-            fontSize: { xs: '1.3rem', md: '1.5rem' }
-          }}>
-            {university.name}
-          </Typography>
-          
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <LocationOnIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5 }} />
-              <Typography variant="body2" color="text.secondary">
-                {university.location}
-              </Typography>
-            </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            {/* University Logo */}
+            <Avatar
+              src={university.logoUrl}
+              alt={university.name}
+              className="h-16 w-16"
+            />
             
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <MenuBookIcon sx={{ color: '#6E4D8B', fontSize: 18, mr: 0.5 }} />
+            {/* University Name and Courses */}
+            <Box>
+              <Typography variant="h5" component="h1" sx={{ 
+                fontWeight: 'bold', 
+                color: '#2c3e50',
+                fontSize: { xs: '1.2rem', sm: '1.5rem', md: '1.8rem' }
+              }}>
+                {university.name}
+              </Typography>
               <Typography variant="body2" color="text.secondary">
-                {university.coursesOffered} Courses Offered
+                Offers {university.coursesOffered}+ Courses across disciplines
               </Typography>
             </Box>
           </Box>
+          
+          {/* Apply Button */}
+          <Button 
+            variant="contained" 
+            sx={{
+              backgroundColor: '#6E4D8B',
+              borderRadius: '8px',
+              boxShadow: 2,
+              textTransform: 'none',
+              fontWeight: 600,
+              px: 3,
+              py: 1,
+              '&:hover': {
+                backgroundColor: '#5a3e73',
+              }
+            }}
+          >
+            Apply
+          </Button>
+        </Box>
+      </Box>
+      
+      {/* University Info Section */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+          gap: 2,
+          py: 4,
+          borderBottom: '1px solid #eaeaea',
+        }}
+      >
+        {/* Website */}
+        <Box sx={{ textAlign: 'left' }}>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            Website
+          </Typography>
+          <Link 
+            href={`https://${university.website}`} 
+            underline="hover" 
+            sx={{ color: '#6E4D8B', fontWeight: 500 }}
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            {university.website || "pixelz.studio"}
+          </Link>
         </Box>
         
-        {/* Apply Button */}
-        <Button 
-          variant="contained" 
-          sx={{
-            backgroundColor: '#6E4D8B',
-            borderRadius: '8px',
-            boxShadow: 2,
-            textTransform: 'none',
-            fontWeight: 600,
-            px: 3,
-            py: 0.8,
-            '&:hover': {
-              backgroundColor: '#5a3e73',
-            },
-            alignSelf: { xs: 'flex-start', md: 'center' }
-          }}
-        >
-          Apply Now
-        </Button>
-      </Paper>
+        {/* Location */}
+        <Box sx={{ textAlign: 'left' }}>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            Location
+          </Typography>
+          <Typography variant="body1" sx={{ fontWeight: 500 }}>
+            {university.location}
+          </Typography>
+        </Box>
+        
+        {/* QS Ranking */}
+        <Box sx={{ textAlign: 'left' }}>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            QS World Ranking
+          </Typography>
+          <Typography variant="body1" sx={{ fontWeight: 500 }}>
+            {university.qsRanking || "10-50"}
+          </Typography>
+        </Box>
+        
+        {/* THE Ranking */}
+        <Box sx={{ textAlign: 'left' }}>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            THE Global Ranking
+          </Typography>
+          <Typography variant="body1" sx={{ fontWeight: 500 }}>
+            {university.theRanking || "10-50"}
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };
