@@ -1,11 +1,14 @@
+
 import React from 'react';
 import { Box, Typography, Link, Button } from '@mui/material';
 import { Avatar } from '@/components/ui/avatar';
 import { Button as ShadcnButton } from '@/components/ui/button';
+
 const HeroSection = ({
   university
 }) => {
   if (!university) return null;
+  
   return <Box sx={{
     width: '100%'
   }}>
@@ -22,21 +25,25 @@ const HeroSection = ({
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>
-        {/* Overlay at the bottom with university info */}
+        {/* Overlay container with university info - now with max-width and centered */}
         <Box sx={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        padding: {
-          xs: 2,
-          sm: 3
-        },
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }} className="my-0 mx-[100px] rounded-lg bg-white">
+          position: 'absolute',
+          bottom: 40,
+          left: 0,
+          right: 0,
+          margin: '0 auto',
+          maxWidth: 'calc(100% - 200px)', // Add max-width with margins
+          backgroundColor: 'white',
+          padding: {
+            xs: 2,
+            sm: 3
+          },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderRadius: '12px',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
+        }}>
           <Box sx={{
           display: 'flex',
           alignItems: 'center',
@@ -82,17 +89,23 @@ const HeroSection = ({
         </Box>
       </Box>
       
-      {/* University Info Section */}
+      {/* University Info Section - now with max-width and centered */}
       <Box sx={{
-      display: 'grid',
-      gridTemplateColumns: {
-        xs: '1fr 1fr',
-        md: 'repeat(4, 1fr)'
-      },
-      gap: 2,
-      py: 4,
-      borderBottom: '1px solid #eaeaea'
-    }} className="mx-[100px] rounded-lg bg-white px-[42px] py-[12px]">
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: '1fr 1fr',
+          md: 'repeat(4, 1fr)'
+        },
+        gap: 2,
+        py: 4,
+        borderBottom: '1px solid #eaeaea',
+        maxWidth: 'calc(100% - 200px)', // Match width of overlay above
+        margin: '0 auto',
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        mt: 2,
+        px: 4
+      }}>
         {/* Website */}
         <Box sx={{
         textAlign: 'left'
@@ -152,4 +165,5 @@ const HeroSection = ({
       </Box>
     </Box>;
 };
+
 export default HeroSection;

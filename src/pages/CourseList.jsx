@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, IconButton } from '@mui/material';
@@ -8,6 +9,7 @@ import CourseListHeader from '../components/CourseListHeader';
 import HeroSection from '../components/HeroSection';
 import TabsSection from '../components/TabsSection';
 import Disclaimer from '../components/Disclaimer';
+
 const CourseList = () => {
   const {
     universityId
@@ -15,6 +17,7 @@ const CourseList = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const university = sampleUniversities.find(uni => uni.id === parseInt(universityId));
+  
   if (!university) {
     return <Container sx={{
       py: 8,
@@ -40,6 +43,7 @@ const CourseList = () => {
         </Box>
       </Container>;
   }
+  
   return <Box sx={{
     minHeight: '100vh',
     backgroundColor: '#F8F9FA'
@@ -50,15 +54,25 @@ const CourseList = () => {
       {/* Hero Section - full width */}
       <HeroSection university={university} />
       
-      {/* Content Section with Tabs */}
-      <Container maxWidth="xl" sx={{
-      py: 4
-    }} className="mx-0 px-[100px]">
-        <TabsSection university={university} activeTab={activeTab} setActiveTab={setActiveTab} universityId={universityId} courses={sampleCourses} />
+      {/* Content Section with Tabs - container removed to allow custom width in TabsSection */}
+      <Box sx={{ py: 4 }}>
+        <TabsSection 
+          university={university} 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab} 
+          universityId={universityId} 
+          courses={sampleCourses} 
+        />
         
-        {/* Disclaimer */}
-        <Disclaimer />
-      </Container>
+        {/* Disclaimer with matched width */}
+        <Box sx={{ 
+          maxWidth: 'calc(100% - 200px)', 
+          margin: '0 auto' 
+        }}>
+          <Disclaimer />
+        </Box>
+      </Box>
     </Box>;
 };
+
 export default CourseList;
