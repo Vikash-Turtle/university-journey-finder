@@ -6,16 +6,9 @@ import {
   Typography, 
   Button, 
   Box, 
-  Chip, 
-  Avatar,
-  Rating, 
   Divider,
   Grid
 } from '@mui/material';
-import SchoolIcon from '@mui/icons-material/School';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import PersonIcon from '@mui/icons-material/Person';
 
 const CourseCard = ({ course }) => {
   return (
@@ -23,10 +16,15 @@ const CourseCard = ({ course }) => {
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      transition: 'all 0.3s ease',
       borderRadius: 3,
       overflow: 'hidden',
-      border: '1px solid #e0e0e0'
+      border: '1px solid #e0e0e0',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      '&:hover': {
+        transform: 'translateY(-4px)',
+        boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)'
+      }
     }}>
       <CardContent sx={{
         p: 3,
@@ -64,17 +62,9 @@ const CourseCard = ({ course }) => {
                 <Typography variant="body2" color="text.secondary">
                   Learning Type
                 </Typography>
-                <Chip 
-                  label={course.learningType || "Full-time"} 
-                  size="small" 
-                  variant="outlined"
-                  sx={{ 
-                    borderRadius: '6px',
-                    backgroundColor: 'rgba(110, 77, 139, 0.08)',
-                    borderColor: 'rgba(110, 77, 139, 0.3)',
-                    fontWeight: 500
-                  }}
-                />
+                <Typography variant="body2" fontWeight="medium">
+                  {course.learningType || "Full-time"}
+                </Typography>
               </Box>
               
               {/* Duration */}
@@ -109,13 +99,6 @@ const CourseCard = ({ course }) => {
             mt: { xs: 2, md: 0 },
             borderTop: { xs: '1px solid #e0e0e0', md: 'none' }
           }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <Rating value={course.rating} precision={0.1} readOnly size="small" sx={{ mr: 1 }} />
-              <Typography variant="body2" color="text.secondary">
-                {course.rating}
-              </Typography>
-            </Box>
-            
             <Button 
               variant="contained"
               sx={{
@@ -131,7 +114,7 @@ const CourseCard = ({ course }) => {
                 width: { xs: '100%', md: 'auto' }
               }}
             >
-              Check Eligibility
+              Program Details
             </Button>
           </Grid>
         </Grid>
