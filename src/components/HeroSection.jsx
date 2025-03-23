@@ -59,8 +59,8 @@ const HeroSection = ({
               alignItems: 'center',
               gap: 2
             }}>
-              {/* University Logo with Fallback */}
-              <Avatar className="h-16 w-16">
+              {/* University Logo with Fallback - now rounded rectangle */}
+              <Avatar className="h-16 w-16 rounded-lg">
                 <AvatarImage src={university.logoUrl} alt={university.name} />
                 <AvatarFallback>{university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}</AvatarFallback>
               </Avatar>

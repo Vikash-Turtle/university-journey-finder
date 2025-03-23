@@ -41,8 +41,8 @@ const CoursesTab = ({ universityId, courses = [] }) => {
       <Box sx={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
-        alignItems: { xs: 'flex-start', md: 'center' },
-        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: { xs: 'flex-start', sm: 'center' }, // Changed sm to align center
+        flexDirection: { xs: 'column', sm: 'row' }, // Changed sm to row for tablet view
         mb: 3,
         gap: 2
       }}>

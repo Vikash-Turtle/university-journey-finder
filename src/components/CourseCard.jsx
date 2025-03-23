@@ -137,11 +137,12 @@ const CourseCard = ({ course }) => {
           </Grid>
         </Grid>
         
-        {/* Show button at bottom for mobile and tablet */}
+        {/* Show button at bottom for mobile and tablet - now full width on mobile */}
         {(isMobile || isTablet) && (
-          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-start' }}>
+          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-start', width: '100%' }}>
             <Button 
               variant="contained"
+              fullWidth={isMobile}
               sx={{
                 borderRadius: '8px',
                 textTransform: 'none',
