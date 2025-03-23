@@ -18,7 +18,7 @@ const TabsSection = ({ university, activeTab, setActiveTab, universityId, course
         md: 'calc(100% - 200px)',
       },
       margin: '0 auto',
-      mt: 4,
+      mt: { xs: 16, sm: 14, md: 12 }, // Increased margin-top to account for floating hero section
     }}>
       <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="bg-white border shadow-sm mb-4 w-full overflow-x-auto">

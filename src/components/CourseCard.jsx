@@ -61,24 +61,27 @@ const CourseCard = ({ course }) => {
             </Typography>
           </Box>
           
-          <Button 
-            variant="contained"
-            sx={{
-              borderRadius: '8px',
-              textTransform: 'none',
-              fontWeight: 600,
-              backgroundColor: '#6E4D8B',
-              px: 3,
-              py: 1,
-              alignSelf: { xs: 'flex-start', md: 'center' },
-              '&:hover': {
-                backgroundColor: '#5a3e73',
-              },
-              width: { xs: 'auto', md: 'auto' }
-            }}
-          >
-            Program Details
-          </Button>
+          {/* Only show button in header for desktop */}
+          {!isMobile && !isTablet && (
+            <Button 
+              variant="contained"
+              sx={{
+                borderRadius: '8px',
+                textTransform: 'none',
+                fontWeight: 600,
+                backgroundColor: '#6E4D8B',
+                px: 3,
+                py: 1,
+                alignSelf: { xs: 'flex-start', md: 'center' },
+                '&:hover': {
+                  backgroundColor: '#5a3e73',
+                },
+                width: { xs: 'auto', md: 'auto' }
+              }}
+            >
+              Check Eligibility
+            </Button>
+          )}
         </Box>
         
         <Divider sx={{ mb: 3 }} />
@@ -133,6 +136,28 @@ const CourseCard = ({ course }) => {
             </Box>
           </Grid>
         </Grid>
+        
+        {/* Show button at bottom for mobile and tablet */}
+        {(isMobile || isTablet) && (
+          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-start' }}>
+            <Button 
+              variant="contained"
+              sx={{
+                borderRadius: '8px',
+                textTransform: 'none',
+                fontWeight: 600,
+                backgroundColor: '#6E4D8B',
+                px: 3,
+                py: 1,
+                '&:hover': {
+                  backgroundColor: '#5a3e73',
+                }
+              }}
+            >
+              Check Eligibility
+            </Button>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Box, Typography, Link, Button } from '@mui/material';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const HeroSection = ({
@@ -21,18 +21,18 @@ const HeroSection = ({
         position: 'relative',
         width: '100%',
         height: {
-          xs: '200px',
-          sm: '300px',
-          md: '400px'
+          xs: '150px',
+          sm: '200px',
+          md: '250px'
         },
         backgroundImage: 'url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2071&auto=format&fit=crop")',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* Unified card with university info - responsive width */}
+        {/* Unified card with university info - floating over the image */}
         <Box sx={{
           position: 'absolute',
-          bottom: 40,
+          bottom: { xs: -120, sm: -100, md: -80 },
           left: 0,
           right: 0,
           margin: '0 auto',
@@ -59,8 +59,11 @@ const HeroSection = ({
               alignItems: 'center',
               gap: 2
             }}>
-              {/* University Logo */}
-              <Avatar src={university.logoUrl} alt={university.name} className="h-16 w-16" />
+              {/* University Logo with Fallback */}
+              <Avatar className="h-16 w-16">
+                <AvatarImage src={university.logoUrl} alt={university.name} />
+                <AvatarFallback>{university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}</AvatarFallback>
+              </Avatar>
               
               {/* University Name and Courses */}
               <Box>
