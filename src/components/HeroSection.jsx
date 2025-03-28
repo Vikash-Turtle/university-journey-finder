@@ -62,7 +62,11 @@ const HeroSection = ({
               {/* University Logo with Fallback - now larger and matches height of university name section */}
               <Avatar className="h-20 w-20 rounded-lg">
                 <AvatarImage src={university.logoUrl} alt={university.name} />
-                <AvatarFallback className="rounded-lg">{university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}</AvatarFallback>
+                <AvatarFallback className="flex h-full w-full items-center justify-center rounded-lg">
+                  <div className="h-full w-full flex items-center justify-center">
+                    {university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}
+                  </div>
+                </AvatarFallback>
               </Avatar>
               
               {/* University Name and Courses */}
