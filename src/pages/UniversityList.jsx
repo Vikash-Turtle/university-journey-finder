@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Grid, Button, Box, useMediaQuery, useTheme, Paper, AppBar, Toolbar, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
 import { sampleUniversities } from '../data/sampleUniversities';
 import UniversityCard from '../components/UniversityCard';
+import LoadingOverlay from '../components/LoadingOverlay';
+
 const UniversityList = () => {
   const [selectedUniversities, setSelectedUniversities] = useState([]);
+  const [loading, setLoading] = useState(true);
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -13,6 +17,16 @@ const UniversityList = () => {
   const isLaptop = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const isDesktop = useMediaQuery(theme.breakpoints.between('lg', 'xl'));
   const isLargeDesktop = useMediaQuery(theme.breakpoints.up('xl'));
+  
+  useEffect(() => {
+    // Simulate loading data
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1800);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleToggleSelection = universityId => {
     setSelectedUniversities(prev => {
       if (prev.includes(universityId)) {
@@ -32,6 +46,11 @@ const UniversityList = () => {
     if (isLargeDesktop) return 3; // 4 cards per row
     return 3; // Default to 4 cards per row
   };
+  
+  if (loading) {
+    return <LoadingOverlay />;
+  }
+  
   return <Box sx={{
     minHeight: '100vh',
     backgroundColor: '#F5F5F5',
