@@ -62,7 +62,7 @@ const HeroSection = ({
               {/* University Logo with Fallback - now larger and matches height of university name section */}
               <Avatar className="h-20 w-20 rounded-lg">
                 <AvatarImage src={university.logoUrl} alt={university.name} />
-                <AvatarFallback>{university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}</AvatarFallback>
+                <AvatarFallback className="rounded-lg">{university.name.charAt(0)}{university.name.split(' ')[1]?.charAt(0)}</AvatarFallback>
               </Avatar>
               
               {/* University Name and Courses */}
@@ -84,22 +84,24 @@ const HeroSection = ({
               </Box>
             </Box>
             
-            {/* Apply Button */}
-            <Button variant="contained" sx={{
-              backgroundColor: '#6E4D8B',
-              borderRadius: '8px',
-              boxShadow: 2,
-              textTransform: 'none',
-              fontWeight: 600,
-              px: { xs: 2, md: 3 },
-              py: 1,
-              fontSize: { xs: '0.8rem', md: '0.875rem' },
-              '&:hover': {
-                backgroundColor: '#5a3e73'
-              }
-            }}>
-              Apply
-            </Button>
+            {/* Apply Button - will be shown only on desktop/tablet */}
+            {!isMobile && (
+              <Button variant="contained" sx={{
+                backgroundColor: '#6E4D8B',
+                borderRadius: '8px',
+                boxShadow: 2,
+                textTransform: 'none',
+                fontWeight: 600,
+                px: { xs: 2, md: 3 },
+                py: 1,
+                fontSize: { xs: '0.8rem', md: '0.875rem' },
+                '&:hover': {
+                  backgroundColor: '#5a3e73'
+                }
+              }}>
+                Apply
+              </Button>
+            )}
           </Box>
           
           {/* University Info Section - now part of the same card */}
