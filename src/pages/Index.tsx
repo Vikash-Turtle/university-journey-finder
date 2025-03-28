@@ -2,7 +2,7 @@
 import { Button, Typography, Box, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import LoadingOverlay from '../components/LoadingOverlay';
+import LoadingOverlayOption1 from '../components/LoadingOverlayOption1';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ const Index = () => {
     setLoading(true);
     setTimeout(() => {
       navigate('/universities');
-    }, 500);
+    }, 1500);
   };
 
   return (
     <>
-      {loading && <LoadingOverlay />}
+      {loading && <LoadingOverlayOption1 />}
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <Container maxWidth="sm">
           <Box className="text-center" sx={{ p: 4, bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>

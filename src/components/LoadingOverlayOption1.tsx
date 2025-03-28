@@ -1,5 +1,5 @@
 
-import { Loader } from "lucide-react";
+import { CircularProgress } from "@mui/material";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
@@ -26,10 +26,10 @@ const LoadingOverlayOption1 = ({ message = "Loading your dream universities..." 
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-white bg-opacity-95 z-50 flex flex-col items-center justify-center transition-opacity duration-300">
+    <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center transition-opacity duration-300">
       <div className="flex flex-col items-center gap-6 max-w-md text-center px-4">
-        <div className="relative animate-spin text-[#6E4D8B]">
-          <Loader size={48} className="stroke-[#6E4D8B]" strokeWidth={2} />
+        <div className="relative text-[#6E4D8B]">
+          <CircularProgress size={48} thickness={2} sx={{ color: '#6E4D8B' }} />
         </div>
         
         <div className="w-full space-y-4">
